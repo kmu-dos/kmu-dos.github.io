@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./document.css">
+    <script src="./index.js"></script>
+    <meta charset="UTF-8">
+    <title>DOS (Dense Or Sparse)</title>
+</head>
+<body>
+    <div class="header">
+        <h1>DOS</h1>
+        <div class="nav-bar">
+            <button id="nav-about" onclick="NavBtn()">About</button>
+            <button id="nav-docu" onclick="NavBtn()">Documentation</button>
+            <button id="nav-demo" onclick="NavBtn()">Demo</button>
+            <button id="nav-contact" onclick="NavBtn()">Contact</button>
+        </div>
+    </div>
+    <div class="contents">
+        <h2>Documentation</h2>
+        <div class="dos-documentation">
+            <h3>DOS Architecture</h3>
+            <img src="./public/implementation-architecture.png" alt="">
+            <ul>
+                <li class="bold-text">User</li>
+                <ul>
+                    <li>Run SPMM of Apache Spark MLLib library.</li>
+                </ul>
+            </ul>
+            <ul>
+                <li class="bold-text">SPMM</li>
+                <ul>
+                    <li>Send matrix multiplication argument (NRL, NCL, NCR, DL, DR, NNZL, NNZR) to Amazon API Gateway using query parameters.</li>
+                    <li>SPMM is performed by receiving the optimal multiplication method from Amazon API Gateway.</li>
+                </ul>
+            </ul>
+            <ul>
+                <li class="bold-text">Microservice</li>
+                <ul>
+                    <li class="bold-text">AWS Lambda</li>
+                    <ul>
+                        <li>AWS Lambda function receives matrix multiplication argument through Amazon API Gateway.</li>
+                        <li>Using Sparse X Sparse Latency prediction Model and Sparse X Dense Latency prediction Model, predict the optimal SPMM method according to the matrix multiplication argument, and send it back to Amazon API Gateway</li>
+                    </ul>
+                    <li class="bold-text">Amazon ECR</li>
+                    <ul>
+                        <li>The container image in Amazon ECR is specified as the runtime environment of the AWS Lambda function.</li>
+                        <li>It stores the library and model weights needed when serving a DNN prediction model.</li>
+                    </ul>
+                    <li class="bold-text">Model</li>
+                    <ul>
+                        <li>DNN Model predicts Sparse X Sparse Latency and Sparse X Dense Latency according to matrix multiplication argument.</li>
+                    </ul>
+                </ul>
+            </ul>
+            <h3>DOS Implementation Sequence</h3>
+            <ul class="sequence-list">
+                <li>Data Generation</li>
+                <li>Model Training</li>
+                <li>Microservice implementation</li>
+                <li>SPMM implementation</li>
+            </ul>
+            <h3>1. Data Generation</h3>
+            <div class="indent">
+                <p>1-1. Install Docker on Amazon EC2(Ubuntu18.04, t2.medium, 20GB)</p>
+                <div class="code">
+                    <p class="remark"># Install Docker</p>
+                    <p>sudo apt-get update -y</p>
+                    <p>sudo apt-get remove docker docker-engine docker.io</p>
+                    <p>sudo apt-get install docker.io -y</p>
+                    <p>sudo service docker</p>
+                    <p>start sudo chmod 666</p>
+                    <p>/var/run/docker.sock sudo usermod -a -G docker ubuntu</p>
+                </div>
+                <p>1-2. Run Container</p>
+                <div class="code">
+                    <p class="remark"># Run the container using the Tensorflow 2.5.0 image</p>
+                    <p>sudo docker pull tensorflow/tensorflow:2.5.0</p>
+                    <p>sudo docker run -it tensorflow/tensorflow:2.5.0 bash</p>
+                </div>
+                <p>1-3. Setting</p>
+                <div class="code">
+                    <p class="remark"># Update information about available packages and their versions</p>
+                    <p>apt-get update -y</p>
+                    <br>
+                    <p class="remark"># Install Packages</p>
+                    <p>apt-get install git -y</p>
+                    <p>DEBIAN_FRONTEND=noninteractive apt-get install r-base -y</p>
+                    <br>
+                    <p class="remark"># Git Clone</p>
+                    <p>cd home</p>
+                    <p>git clone https://github.com/kmu-bigdata/dos.git</p>
+                    <br>
+                    <p class="remark"># Install Python Packages</p>
+                    <p>cd dos</p>
+                    <p>pip install -r requirements.txt</p>
+                </div>
+                <p>1-4. Data Generation</p>
+                <img src="./public/train-dataset-generation.png" alt="" style="width: 90%;margin: 30px 5%">
+                <div class="code">
+                    <p>cd data-generation</p>
+                    <br>
+                    <p class="remark"># Proceed with the SPMM Scenario Generation, Filtering,</p>
+                    <p class="remark"># and Optimal Scenario Selection process as shown in the figure above</p>
+                    <p>./generate-and-optimize-lhs-data.sh</p>
+                    <br>
+                    <p class="remark"># Proceed with the Training Dataset Generation process shown in the figure above.</p>
+                    <p class="remark"># SPMM based on /data/optimal-lhs-data.csv</p>
+                    <br>
+                    <p class="remark"># Split SPMM data into Trainset and Testset</p>
+                    <p>./generate-trainset-testset.sh</p>
+                </div>
+            </div>
+            <h3>2. Model Training</h3>
+            <div class="indent">
+                <p>2-1. Train DOS</p>
+                <div class="code">
+                    <p>cd ../dos</p>
+
+                    <p class="remark"># Train the model using ../data/train-set.csv</p>
+                    <p>python3 train.py</p>
+                </div>
+                <p>2-2. Test DOS</p>
+                <div class="code">
+                    <p class="remark"># Test the model using ../data/test-set.csv</p>
+                    <p>python3 test.py</p>
+                </div>
+                <ul>
+                    <li>Returns the MAPE and RMSE of the Sparse X Sparse prediction model, and Sparse X Dense prediction model.</li>
+                    <ul>
+                        <li>“Sparse X Sparse prediction model”</li>
+                        <li>“MAPE : [MAPE]”</li>
+                        <li>“RMSE : [RMSE]”</li>
+                        <li>“Sparse X Dense prediction model”</li>
+                        <li>“MAPE : [MAPE]”</li>
+                        <li>“RMSE : [RMSE]”</li>
+                    </ul>
+                </ul>
+                <p>2-3. Inference DOS</p>
+                <div class="code">
+                    <p class="remark"># Enter matrix multiplication information to check Sparse X Sparse Latency and Sparse X Dense Latency prediction results</p>
+                    <p>python3 inference.py --nr_l 126899 --nc_l 52210 --nc_r 12948 --d_l 0.00182521 --d_r 0.07 --nnz_l 12092788 --nnz_r 47322584</p>
+                </div>
+                <ul>
+                    <li>Returns the latency according to the SPMM method, and recommends the optimal SPMM method.</li>
+                    <ul>
+                        <li>”Sparse X Sparse Latency : [Predicted Latency]ms , Sparse X Dense Latency : [Predicted Latency]ms, Optimal Method : [Optimal Method]"</li>
+                    </ul>
+                </ul>
+            </div>
+            <h3>3. Microservice implementation</h3>
+            <div class="indent">
+                <p>3-1. Setting on Amazon EC2(Ubuntu18.04, t2.medium, 20GB)</p>
+                <div class="code">
+                    <p class="remark"># Update information about available packages and their versions</p>
+                    <p>sudo apt-get update -y</p>
+                    <br>
+                    <p class="remark"># Install Packages</p>
+                    <p>sudo apt-get install git -y</p>
+                    <p>sudo apt-get install awscli -y</p>
+                    <br>
+                    <p class="remark"># Git Clone</p>
+                    <p>git clone https://github.com/kmu-bigdata/dos.git</p>
+                </div>
+                <p>3-2. Install Docker</p>
+                <div class="code">
+                    <p class="remark"># Install Docker</p>
+                    <p>sudo apt-get remove docker docker-engine docker.io</p>
+                    <p>sudo apt-get install docker.io -y</p>
+                    <p>sudo service docker start</p>
+                    <p>sudo chmod 666 /var/run/docker.sock</p>
+                    <p>sudo usermod -a -G docker ubuntu</p>
+                </div>
+                <p>3-3. Build Container Image using Dockerfile</p>
+                <div class="code">
+                    <p class="remark"># Container images provide the necessary libraries</p>
+                    <p class="remark"># and model weights when serving DNN prediction models.</p>
+                    <p>cd dos/microservice</p>
+                    <p>docker build -t "image-name" .</p>
+                </div>
+                <p>3-4. Create Amazon ECR Repository</p>
+                <ul>
+                    <li>Create Amazon ECR Repository to store container images.</li>
+                </ul>
+                <p>3-5. Upload Container Image to Amazon ECR</p>
+                <div class="code">
+                    <p class="remark"># Account Setup to Use the AWS CLI</p>
+                    <p>aws configure</p>
+
+                    <p class="remark"># Variable setting</p>
+                    <p>export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)</p>
+                    <p>echo "export ACCOUNT_ID=${ACCOUNT_ID}" | tee -a ~/.bash_profile</p>
+
+                    <p class="remark"># Image tag and push</p>
+                    <p>docker tag "image-name" $ACCOUNT_ID.dkr.ecr."region-name".amazonaws.com/"ecr-name"</p>
+                    <p>aws ecr get-login-password --region "region-name" | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr."region-name".amazonaws.com</p>
+                    <p>docker push $ACCOUNT_ID.dkr.ecr."region-name".amazonaws.com/"ecr-name"</p>
+                </div>
+                <p>3-6. Create a AWS Lambda based on Amazon ECR Container Image</p>
+                <ul>
+                    <li>The container image in Amazon ECR is specified as the runtime environment of the AWS Lambda function.</li>
+                    <li>When configuring the Lambda, set the memory to 512 MB and the timeout to 1 minute.</li>
+                </ul>
+                <p>3-7. Write a Lambda function that recommends an optimal multiplication method based on matrix multiplication information</p>
+                <ul>
+                    <li>The Lambda function predicts and transmits the optimal SPMM method according to the matrix multiplication arguments using the Sparse X Sparse Latency prediction model and the Sparse X Dense Latency prediction model.</li>
+                    <li>Lambda functions can be written based on dos/microservice/lambda_function.py.</li>
+                </ul>
+                <p>3-8. Create Amazon API Gateway and connect AWS Lambda trigger</p>
+                <ul>
+                    <li>The AWS Lambda function receives a matrix multiplication argument from Amazon API Gateway.</li>
+                    <li>After that, the optimal SPMM method according to the matrix multiplication argument is sent back to Amazon API Gateway.</li>
+                </ul>
+            </div>
+            <h3>4. SPMM implementation</h3>
+            <div class="indent">
+                <p>4-1. Setting on Amazon EMR-6.4.0</p>
+                <div class="code">
+                    <p class="remark"># Update information about available packages and their versions</p>
+                    <p>sudo apt-get update -y</p>
+
+                    <p class="remark"># Install Packages</p>
+                    <p>sudo apt-get install git -y</p>
+
+                    <p class="remark"># Git Clone</p>
+                    <p>Cd /home/hadoop</p>
+                    <p>git clone https://github.com/kmu-bigdata/dos.git</p>
+                </div>
+                <p>4-2. Build</p>
+                <div class="code">
+                    <p class="remark"># Spark build using Apache Maven</p>
+                    <p>cd dos/spark-3.1.2 && ./build/mvn -pl :spark-mllib_2.12 -DskipTests clean install</p>
+                </div>
+                <p>4-3. Replace existing MLLib jar file in Amazon EMR with new build jar file</p>
+                <div class="code">
+                    <p>sudo mv /home/hadoop/dos/spark-3.1.2/mllib/target/spark-mllib_2.12-3.1.2.jar /usr/lib/spark/jars/spark-mllib_2.12-3.1.2-amzn-0.jar</p>
+                </div>
+                <p>4-4. Run Spark</p>
+                <div class="code">
+                    <p class="remark"># The easiest way to start using Spark</p>
+                    <p></p>spark-shell</p>
+                </div>
+                <p>4-5. Simple way to use DOS</p>
+                <ul>
+                    <li>SparseMatrix Multiplication</li>
+                    <div class="code">
+                        <p>import org.apache.spark.mllib.linalg.SparseMatrix</p>
+                        <p>import java.util.Random;</p>
+                        <br>
+                        <p>val NumRow_L = 2</p>
+                        <p>val NumCol_L = 3</p>
+                        <p>val NumCol_R = 3</p>
+                        <p>val D_L = 0.001</p>
+                        <p>val D_R = 0.005</p>
+                        <br>
+                        <p>val l_sm = SparseMatrix.sprand(NumRow_L, NumCol_L, D_L, new Random(24))</p>
+                        <p>val r_sm = SparseMatrix.sprand(NumCol_L, NumCol_R, D_R, new Random(24))</p>
+                        <br>
+                        <p>l_sm.multiply(r_sm)</p>
+                    </div>
+                    <li>BlockMatrix Multiplication</li>
+                    <div class="code">
+                        <p>import org.apache.spark.mllib.linalg.distributed.{CoordinateMatrix, MatrixEntry}</p>
+                        <br>
+                        <p>val NumRow_L = 2</p>
+                        <p>val NumCol_L = 3</p>
+                        <p>val NumCol_R = 3</p>
+                        <p>val BlockRow_L = 1</p>
+                        <p>val BlockCol_L = 1</p>
+                        <p>val BlockCol_R = 1</p>
+                        <br>
+                        <p>val l_entries = sc.parallelize(Seq((0, 0, 1.0), (1, 1, 2.0), (0, 2, 3.0), (1, 2, 4.0))).map{case (i, j, v) => MatrixEntry(i, j, v)}</p>
+                        <p>val l_block_matrix = new CoordinateMatrix(l_entries, NumRow_L, NumCol_L).toBlockMatrix(BlockRow_L, BlockCol_L).cache</p>
+                        <br>
+                        <p>val r_entries = sc.parallelize(Seq((1, 0, 5.0), (2, 0, 6.0), (0, 1, 7.0), (2, 1, 8.0), (1, 2, 9.0))).map{case (i, j, v) => MatrixEntry(i, j, v)}</p>
+                        <p>val r_block_matrix = new CoordinateMatrix(r_entries, NumCol_L, NumCol_R).toBlockMatrix(BlockCol_L, BlockCol_R).cache</p>
+                        <br>
+                        <p>l_block_matrix.multiply(r_block_matrix).validate</p>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

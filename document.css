@@ -1,0 +1,40 @@
+.dos-documentation {
+    margin-top: 20px;
+    color: #5e5e5e;
+}
+h3 {
+    font-size: 20px;
+    color: #424242;
+    margin: 40px 0 20px 0;
+}
+.bold-text {
+    font-weight: bold;
+}
+.dos-documentation img {
+    width: 50%;
+    margin: 30px 25%;
+}
+.dos-documentation ul li {
+    list-style-type: disc;
+    line-height: 24px;
+    font-size: 16px;
+}
+.sequence-list li {
+    list-style-type: decimal !important;
+}
+.indent {
+    padding-left: 30px;
+}
+.code {
+    width: fit-content;
+    margin: 20px 0 20px 20px;
+    padding: 15px 30px;
+    border-radius: 15px;
+    background-color: #696969;
+    color: #fff;
+    line-height: 24px;
+}
+.remark {
+    color: #FFD479;
+    font-weight: bold;
+}

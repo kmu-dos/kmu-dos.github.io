@@ -1,7 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js"></script>
+    <meta charset="UTF-8">
+    <title>DOS (Dense Or Sparse)</title>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div class="header">
+        <h1>DOS</h1>
+        <div class="nav-bar">
+            <button id="nav-about" onclick="NavBtn()">About</button>
+            <button id="nav-docu" onclick="NavBtn()">Documentation</button>
+            <button id="nav-demo" onclick="NavBtn()">Demo</button>
+            <button id="nav-contact" onclick="NavBtn()">Contact</button>
+        </div>
+    </div>
+    <div class="contents">
+        <h2>DOS SPMM Prediction</h2>
+        <div class="demo-description">
+        <p>DoS performs optimal SPMM by estimating the SPMM latency when the right matrix is transformed to dense format or remains in sparse format based on matrix multiplication information.</p>
+        <br>
+        <p>You can use this system in the following order.</p>
+        <br>
+        <p>Step 1. Write matrix multiplication information</p>
+        <p>(row of left matrix, column of left matrix, column of right matrix, density of left matrix, density of right matrix).</p>
+        <br>
+        <p>Step 2. Click Submit.</p>
+        <br>
+        <p>Step 3. Check Sparse X Sparse Latency and Sparse X Dense Latency according to matrix multiplication information.</p>
+        </div>
+        <div id="demo-function">
+            <div id="user-input"></div>
+            <div id="data-table"></div>
+            <div id="data-graph"></div>
+        </div>
+    </div>
 </body>
 </html>
