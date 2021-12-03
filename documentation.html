@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="./document.css">
     <script src="./index.js"></script>
     <meta charset="UTF-8">
-    <title>DOS (Dense Or Sparse)</title>
+    <title>DoS</title>
 </head>
 <body>
     <div class="header">
-        <h1>DOS</h1>
+        <h1>DoS</h1>
         <div class="nav-bar">
             <button id="nav-about" onclick="NavBtn()">About</button>
             <button id="nav-docu" onclick="NavBtn()">Documentation</button>
@@ -20,7 +20,7 @@
     <div class="contents">
         <h2>Documentation</h2>
         <div class="dos-documentation">
-            <h3>DOS Architecture</h3>
+            <h3>DoS Architecture</h3>
             <img src="./public/implementation-architecture.png" alt="">
             <ul>
                 <li class="bold-text">User</li>
@@ -54,7 +54,7 @@
                     </ul>
                 </ul>
             </ul>
-            <h3>DOS Implementation Sequence</h3>
+            <h3>DoS Implementation Sequence</h3>
             <ul class="sequence-list">
                 <li>Data Generation</li>
                 <li>Model Training</li>
@@ -114,14 +114,14 @@
             </div>
             <h3>2. Model Training</h3>
             <div class="indent">
-                <p>2-1. Train DOS</p>
+                <p>2-1. Train DoS</p>
                 <div class="code">
                     <p>cd ../dos</p>
 
                     <p class="remark"># Train the model using ../data/train-set.csv</p>
                     <p>python3 train.py</p>
                 </div>
-                <p>2-2. Test DOS</p>
+                <p>2-2. Test DoS</p>
                 <div class="code">
                     <p class="remark"># Test the model using ../data/test-set.csv</p>
                     <p>python3 test.py</p>
@@ -137,7 +137,7 @@
                         <li>“RMSE : [RMSE]”</li>
                     </ul>
                 </ul>
-                <p>2-3. Inference DOS</p>
+                <p>2-3. Inference DoS</p>
                 <div class="code">
                     <p class="remark"># Enter matrix multiplication information to check Sparse X Sparse Latency and Sparse X Dense Latency prediction results</p>
                     <p>python3 inference.py --nr_l 126899 --nc_l 52210 --nc_r 12948 --d_l 0.00182521 --d_r 0.07 --nnz_l 12092788 --nnz_r 47322584</p>
@@ -241,7 +241,7 @@
                     <p class="remark"># The easiest way to start using Spark</p>
                     <p></p>spark-shell</p>
                 </div>
-                <p>4-5. Simple way to use DOS</p>
+                <p>4-5. Simple way to use DoS</p>
                 <ul>
                     <li>SparseMatrix Multiplication</li>
                     <div class="code">
