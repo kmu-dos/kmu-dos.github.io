@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="./style.css">
     <script src="./index.js"></script>
+    <script src="./demo.js"></script>
     <meta charset="UTF-8">
     <title>DoS</title>
 </head>
@@ -17,7 +18,7 @@
         </div>
     </div>
     <div class="contents">
-        <h2>DoS SPMM Prediction</h2>
+        <h2>DOS SPMM Prediction</h2>
         <div class="demo-description">
         <p>DoS performs optimal SPMM by estimating the SPMM latency when the right matrix is transformed to dense format or remains in sparse format based on matrix multiplication information.</p>
         <br>
@@ -31,9 +32,66 @@
         <p>Step 3. Check Sparse X Sparse Latency and Sparse X Dense Latency according to matrix multiplication information.</p>
         </div>
         <div id="demo-function">
-            <div id="user-input"></div>
-            <div id="data-table"></div>
-            <div id="data-graph"></div>
+            <table id="user-input">
+                <tr>
+                    <th>Matrix info</th>
+                    <th>Input</th>
+                </tr>
+                <tr>
+                    <th>NR_L</th>
+                    <td><input type="text" placeholder="10000" id="nr_l"></td>
+                </tr>
+                <tr>
+                    <th>NC_L</th>
+                    <td><input type="text" placeholder="60000" id="nc_l"></td>
+                </tr>
+                <tr>
+                    <th>NC_R</th>
+                    <td><input type="text" placeholder="20000" id="nc_r"></td>
+                </tr>
+                <tr>
+                    <th>D_L</th>
+                    <td><input type="text" placeholder="0.0001" id="d_l"></td>
+                </tr>
+                <tr>
+                    <th>D_R</th>
+                    <td><input type="text" placeholder="0.03" id="d_r"></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><button onclick="submit()" class="submit-btn">SUBMIT</button></th>
+                </tr>
+            </table>
+            <div id="result-data">
+                <table>
+                    <tr>
+                        <th>SPMM Method</th>
+                        <th>Latency (ms)</th>
+                    </tr>
+                    <tr>
+                        <td>Sparse X Sparse</td>
+                        <td id="sparse"></td>
+                    </tr>
+                    <tr>
+                        <td>Sparse X Dense</td>
+                        <td id="dense"></td>
+                    </tr>
+                </table>
+                <table style="margin-top: 50px;">
+                    <tr>
+                        <th>Optimal Method</th>
+                        <th>X times improvement</th>
+                    </tr>
+                    <tr>
+                        <td>Sparse X Dense</td>
+                        <td id="optim_method"></td>
+                    </tr>
+                </table>
+                <p id="result-comment"></p>
+            </div>
+            <div id="data-graph">
+                <canvas></canvas>
+            </div>
         </div>
     </div>
 </body>
