@@ -4,11 +4,11 @@
     <link rel="stylesheet" href="./style.css">
     <script src="./index.js"></script>
     <meta charset="UTF-8">
-    <title>DoS</title>
+    <title>DOS</title>
 </head>
 <body>
     <div class="header">
-        <h1>DoS</h1>
+        <h1>DOS</h1>
         <div class="nav-bar">
             <button id="nav-about" onclick="NavBtn()">About</button>
             <button id="nav-docu" onclick="NavBtn()">Documentation</button>
@@ -17,21 +17,21 @@
         </div>
     </div>
     <div class="contents">
-        <h2>DoS (Dense or Sparse)</h2>
+        <h2>DOS (Dense Or Sparse)</h2>
         <div class="about-description">
         <p>The default Spark SPMM implementation always transforms a right sparse matrix to a dense format before conducting the multiplication, and it can incur significant performance overhead for various SPMM tasks.</p>
         <br>
-        <p>DoS is an optimal SPMM implementation service that converts the right matrix to Dense format or maintains it in sparse format using SPMM latency prediction model</p>
+        <p>DOS is an optimal SPMM implementation service that converts the right matrix to Dense format or maintains it in sparse format using SPMM latency prediction model</p>
         <br>
-        <p>You can try running DoS directly through the demo system on this web page.</p>
+        <p>You can try running DOS directly through the demo system on this web page.</p>
         <br>
-        <p> If you look at the documentation part, you can check the architecture of DoS and learn how to use it, and all the codes are provied as open source.</p>
+        <p> If you look at the documentation part, you can check the architecture of DOS and learn how to use it, and all the codes are provied as open source.</p>
         <br>
         <p>You can communicate with the researcher through the information in Contact.</p>
         </div>
         <div class="about-button">
-            <button>SEE PAPER</button>
-            <button>GITHUB</button>
+            <button onclick="(function(){window.open('https://github.com/kmu-bigdata/dos')})()">SEE PAPER</button>
+            <button onclick="(function(){window.open('https://github.com/kmu-bigdata/dos')})()">GITHUB</button>
         </div>
     </div>
 </body>
