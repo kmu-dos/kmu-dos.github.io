@@ -138,8 +138,20 @@ h2 {
     color: red;
     font-size: 17px;
 }
-#data-graph {
+.graph-section {
     width: 40%;
+    padding: 30px 0;
+    height: max-content;
+    text-align: center;
+}
+.graph-section p {
+    font-size: 18px;
+    color: #424242;
+}
+#data-graph {
+    width: 100%;
+    height: fit-content;
+    max-height: 300px;
 }
 /*about*/
 .about-description {

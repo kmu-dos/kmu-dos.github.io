@@ -5,6 +5,7 @@
     <script src="./index.js"></script>
     <script src="./demo.js"></script>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>DoS</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
         </div>
     </div>
     <div class="contents">
-        <h2>DOS SPMM Prediction</h2>
+        <h2>DoS SPMM Prediction</h2>
         <div class="demo-description">
         <p>DoS performs optimal SPMM by estimating the SPMM latency when the right matrix is transformed to dense format or remains in sparse format based on matrix multiplication information.</p>
         <br>
@@ -89,8 +90,10 @@
                 </table>
                 <p id="result-comment"></p>
             </div>
-            <div id="data-graph">
-                <canvas></canvas>
+            <div class="graph-section">
+                <p>Latency Prediction Result </p><p>according to SPMM Method</p>
+                <canvas id="data-graph"></canvas>
+                <p>SPMM Method</p>
             </div>
         </div>
     </div>
