@@ -145,6 +145,7 @@ h2 {
     text-align: center;
 }
 .graph-section p {
+    padding-left: 20%;
     font-size: 18px;
     color: #424242;
 }
@@ -152,6 +153,7 @@ h2 {
     width: 100%;
     height: fit-content;
     max-height: 300px;
+    margin: 15px 0;
 }
 /*about*/
 .about-description {

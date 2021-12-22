@@ -1,48 +1,57 @@
+let chart, resultChart
 document.addEventListener("DOMContentLoaded", function(){
-    const chart = document.getElementById('data-graph').getContext('2d');
-    let resultChart = new Chart(chart, {
+    chart = document.getElementById('data-graph').getContext('2d');
+    resultChart = new Chart(chart, {
         type: 'bar',
-        data: {
-            labels: ['A', 'B'],
-            datasets: [{
-                label: 'latency (m/s)',
-                data: [1000, 3000],
-                backgroundColor : '#4CAAE8',
-            }]
+        data: defaultData,
+        options: defaultOption
+    })
+})
+let defaultData = {
+    labels: ['Sparse X Sparse', 'Sparse X Dense'],
+    datasets: [{
+        label: 'Latency (ms)',
+        backgroundColor: "#008fff",
+        data: [],
+    }]
+}
+let defaultOption = {
+    responsive:true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            display: false,
         },
-        options: {
-            plugins : {
-                legend: {
-                    display: false,
-                }
-            },
-            responsive:true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    type: 'linear',
-                    grid: {
-                        display: false
-                    },
-                },
-                y: {
-                    type: 'linear',
-                    position: 'left',
-                    scalePositionLeft: true,
-                    title: {
-                        display: true,
-                        text: 'Latency (ms)',
-                        font : {
-                            size : 14,
-                        }
-                    },
-                }
+    },
+    scales: {
+        x: {
+            grid : {
+                display : false,
             }
         },
-    })
-    console.log('hi');
-})
-
+        y: {
+            type: 'linear',
+            position: 'left',
+            scalePositionLeft: true,
+            title: {
+                display: true,
+                text: 'Latency (ms)',
+                font : {
+                    size : 14,
+                }
+            },
+            beginAtZero : true,
+            min: 0,
+            max: 30000,
+            ticks : {
+                stepSize: 7500
+            },
+            grid: {
+                display: true,
+            }
+        }
+    }
+}
 async function submit (){
     const lr = document.getElementById('nr_l').value ? document.getElementById('nr_l').value : 10000;
     const lc = document.getElementById('nc_l').value ? document.getElementById('nc_l').value : 60000;
@@ -82,4 +91,19 @@ async function submit (){
         ("The performance of Sparse X Sparse is " + x + " better than the default Apache Spark SPMM.")
         : ("The performance of default Apache Spark SPMM is improved " + x + " times than Sparse X Sparse.");
     document.getElementById('result-comment').style.color = optimal==='smsm' ? 'red' : '#000';
+    if(typeof resultChart != 'undefined'){
+        resultChart.destroy()
+    }
+    resultChart = new Chart(chart, {
+        type: 'bar',
+        data: {
+            labels: ['Sparse X Sparse', 'Sparse X Dense'],
+            datasets: [{
+                label: 'Latency (ms)',
+                backgroundColor: "#008fff",
+                data: [sparse, dense],
+            }]
+        },
+        options: defaultOption
+    })
 }
