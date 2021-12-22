@@ -27,6 +27,11 @@ let defaultOption = {
         x: {
             grid : {
                 display : false,
+            },
+            ticks: {
+                font: {
+                    size: 14
+                },
             }
         },
         y: {
@@ -44,6 +49,7 @@ let defaultOption = {
             min: 0,
             max: 30000,
             ticks : {
+                padding: 10,
                 stepSize: 7500
             },
             grid: {
@@ -53,6 +59,8 @@ let defaultOption = {
     }
 }
 async function submit (){
+    const load = document.getElementById("loading");
+    load.style.display = 'block';
     const lr = document.getElementById('nr_l').value ? document.getElementById('nr_l').value : 10000;
     const lc = document.getElementById('nc_l').value ? document.getElementById('nc_l').value : 60000;
     const rc = document.getElementById('nc_r').value ? document.getElementById('nc_r').value : 20000;
@@ -77,7 +85,10 @@ async function submit (){
             "rnnz" : rnnz
         }),
     }).then((result) => result.json())
-        .then((data) => resultData = data.body);
+        .then((data) => {
+            resultData = data.body;
+            load.style.display = 'none';
+        });
 
     const sparse = parseInt(resultData.split("sm*sm : [")[1].split(']')[0]);
     const dense = parseInt(resultData.split('sm*dm : [')[1].split(']')[0]);
