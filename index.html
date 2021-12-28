@@ -6,11 +6,16 @@
     <script src="./demo.js"></script>
     <meta charset="UTF-8">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>DoS</title>
+    <!--  font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Ubuntu&display=swap" rel="stylesheet">
+    <!--  font  -->
+    <title>DoS (Dense or Sparse) </title>
 </head>
 <body>
     <div class="header">
-        <h1>DoS</h1>
+        <h1>DoS (Dense or Sparse)</h1>
         <div class="nav-bar">
             <button id="nav-about" onclick="NavBtn()">About</button>
             <button id="nav-docu" onclick="NavBtn()">Documentation</button>
@@ -39,23 +44,33 @@
                     <th>Input</th>
                 </tr>
                 <tr>
-                    <th>NR_L</th>
+                    <th class="add-desc">NR<p class="subscription">L</p>
+                        <p class="desc-text">The number of rows for a left matrix</p>
+                    </th>
                     <td><input type="text" placeholder="10000" id="nr_l"></td>
                 </tr>
                 <tr>
-                    <th>NC_L</th>
+                    <th class="add-desc">NC<p class="subscription">L</p>
+                        <p class="desc-text">The number of columns for a left matrix</p>
+                    </th>
                     <td><input type="text" placeholder="60000" id="nc_l"></td>
                 </tr>
                 <tr>
-                    <th>NC_R</th>
+                    <th class="add-desc">NC<p class="subscription">R</p>
+                        <p class="desc-text">The number of columns for a right matrix</p>
+                    </th>
                     <td><input type="text" placeholder="20000" id="nc_r"></td>
                 </tr>
                 <tr>
-                    <th>D_L</th>
+                    <th class="add-desc">D<p class="subscription">L</p>
+                        <p class="desc-text">The density of the left matrix</p>
+                    </th>
                     <td><input type="text" placeholder="0.0001" id="d_l"></td>
                 </tr>
                 <tr>
-                    <th>D_R</th>
+                    <th class="add-desc">D<p class="subscription">R</p>
+                        <p class="desc-text">The density of the right matrix</p>
+                    </th>
                     <td><input type="text" placeholder="0.03" id="d_r"></td>
                 </tr>
                 <tr>

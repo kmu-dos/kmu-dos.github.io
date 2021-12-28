@@ -5,6 +5,9 @@ body, p, a, button, h1, h2, h3 {
     border: none;
     background: none;
 }
+html {
+    font-family: 'Roboto', sans-serif;
+}
 .header {
     background-color: #f8f8f8;
     padding: 20px 10% 0 10%;
@@ -19,6 +22,8 @@ body, p, a, button, h1, h2, h3 {
     color: #777777;
     font-weight: bold;
     font-size: 50px;
+    font-family: 'Ubuntu', sans-serif;
+    padding-bottom: 5px;
 }
 .nav-bar {
     display: flex;
@@ -31,6 +36,7 @@ body, p, a, button, h1, h2, h3 {
     color: #777;
     cursor: pointer;
     transition: all 0.5s;
+    font-family: 'Roboto', sans-serif;
 }
 .nav-bar button:hover {
     color: #008fff;
@@ -85,12 +91,37 @@ h2 {
 #user-input input {
     border: none;
     text-align: center;
-    padding: 0;
+    padding: 11px 0;
     height: 100%;
     width: 100%;
+    outline: none;
 }
 #user-input tr:last-child {
     height: 80px;
+}
+.add-desc {
+    position: relative;
+}
+.desc-text {
+    display: none;
+    position: absolute;
+    background-color: rgba(28,28,28,0.56);
+    color: #fff;
+    left: -100%;
+    top: 0;
+    max-width: 100%;
+    font-size: 14px;
+    word-break: keep-all;
+    text-align: left;
+    padding: 10px;
+}
+.add-desc:hover .desc-text{
+    display: block;
+}
+.subscription {
+    font-size: 10px;
+    display: inline-block;
+    vertical-align: bottom;
 }
 .submit-btn {
     background-color: #374047;
@@ -117,6 +148,7 @@ h2 {
     width: 100%;
     text-align: center;
     border-spacing: 0;
+    margin-top: 3px;
     border-collapse: collapse;
 }
 #result-data table td {
@@ -124,7 +156,7 @@ h2 {
     border-collapse: collapse;
 }
 #result-data tr {
-    height: 40px;
+    height: 50px;
 }
 #result-data th {
     width: max-content;
@@ -140,13 +172,14 @@ h2 {
 }
 .graph-section {
     width: 40%;
-    padding: 30px 0;
+    padding: 30px 0 30px 2%;
     height: max-content;
     text-align: center;
 }
 .graph-section p {
     padding-left: 20%;
     font-size: 18px;
+    font-weight: bold;
     color: #424242;
 }
 #data-graph {
@@ -183,8 +216,8 @@ h2 {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 10px solid #008fff;
-    border-color: #008fff transparent #008fff transparent;
+    border: 10px solid #4c9de7;
+    border-color: #4c9de7 transparent #4c9de7 transparent;
     animation: rotate 1.5s linear infinite;
 }
 /*about*/

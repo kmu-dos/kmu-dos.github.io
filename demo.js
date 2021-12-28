@@ -30,6 +30,7 @@ let defaultOption = {
             },
             ticks: {
                 font: {
+                    family : 'Roboto',
                     size: 14
                 },
             }
@@ -42,13 +43,17 @@ let defaultOption = {
                 display: true,
                 text: 'Latency (ms)',
                 font : {
-                    size : 14,
-                }
+                    family : 'Roboto',
+                    size : 18,
+                    weight : 'bold',
+                },
+                color: '#424242',
             },
             beginAtZero : true,
             min: 0,
             max: 30000,
             ticks : {
+                fontSize:12,
                 padding: 10,
                 stepSize: 7500
             },
@@ -86,9 +91,11 @@ async function submit (){
         }),
     }).then((result) => result.json())
         .then((data) => {
+            timeout = false;
             resultData = data.body;
             load.style.display = 'none';
-        });
+    });
+
 
     const sparse = parseInt(resultData.split("sm*sm : [")[1].split(']')[0]);
     const dense = parseInt(resultData.split('sm*dm : [')[1].split(']')[0]);
@@ -111,8 +118,10 @@ async function submit (){
             labels: ['Sparse X Sparse', 'Sparse X Dense'],
             datasets: [{
                 label: 'Latency (ms)',
-                backgroundColor: "#008fff",
+                backgroundColor: "#4c9de7",
                 data: [sparse, dense],
+                barThickness: 50,
+                maxBarThickness: 80,
             }]
         },
         options: defaultOption
