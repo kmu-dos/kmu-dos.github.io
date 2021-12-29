@@ -74,6 +74,7 @@ async function submit (){
     const lnnz = lr*lc*ld;
     const rnnz = lc*rc*rd;
     let resultData;
+    let timeOut = 0;
     const api = "https://lcukdaf75g.execute-api.us-west-2.amazonaws.com/dos-inference-stage/dos-inference-resource";
     await fetch(api, {
         method: "POST",
@@ -91,10 +92,9 @@ async function submit (){
         }),
     }).then((result) => result.json())
         .then((data) => {
-            timeout = false;
             resultData = data.body;
             load.style.display = 'none';
-    });
+    }).catch((e) => console.log(e));
 
 
     const sparse = parseInt(resultData.split("sm*sm : [")[1].split(']')[0]);

@@ -6,7 +6,6 @@ body, p, a, button, h1, h2, h3 {
     background: none;
 }
 html {
-    font-family: 'Roboto', sans-serif;
 }
 .header {
     background-color: #f8f8f8;
@@ -22,7 +21,6 @@ html {
     color: #777777;
     font-weight: bold;
     font-size: 50px;
-    font-family: 'Ubuntu', sans-serif;
     padding-bottom: 5px;
 }
 .nav-bar {
@@ -36,7 +34,6 @@ html {
     color: #777;
     cursor: pointer;
     transition: all 0.5s;
-    font-family: 'Roboto', sans-serif;
 }
 .nav-bar button:hover {
     color: #008fff;
@@ -143,6 +140,7 @@ h2 {
     padding: 30px;
     border-right: 1px solid #d0d0d0;
     width: calc(40% - 60px);
+    color: #424242;
 }
 #result-data table {
     width: 100%;
