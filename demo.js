@@ -124,6 +124,51 @@ async function submit (){
                 maxBarThickness: 80,
             }]
         },
-        options: defaultOption
+        options: {
+            responsive:true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                },
+            },
+            scales: {
+                x: {
+                    grid : {
+                        display : false,
+                    },
+                    ticks: {
+                        font: {
+                            family : 'Roboto',
+                            size: 14
+                        },
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    position: 'left',
+                    scalePositionLeft: true,
+                    title: {
+                        display: true,
+                        text: 'Latency (ms)',
+                        font : {
+                            family : 'Roboto',
+                            size : 18,
+                            weight : 'bold',
+                        },
+                        color: '#424242',
+                    },
+                    beginAtZero : true,
+                    ticks : {
+                        fontSize:12,
+                        padding: 10,
+                    },
+                    grid: {
+                        display: true,
+                    }
+                }
+            }
+
+        }
     })
 }
