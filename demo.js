@@ -1,3 +1,7 @@
+window.onload = function() {
+  submit();
+};
+
 let chart, resultChart
 document.addEventListener("DOMContentLoaded", function(){
     chart = document.getElementById('data-graph').getContext('2d');
