@@ -1,5 +1,29 @@
 window.onload = function() {
-  submit();
+  const lr = document.getElementById('nr_l').value ? document.getElementById('nr_l').value : 10000;
+  const lc = document.getElementById('nc_l').value ? document.getElementById('nc_l').value : 60000;
+  const rc = document.getElementById('nc_r').value ? document.getElementById('nc_r').value : 20000;
+  const ld = document.getElementById('d_l').value ? document.getElementById('d_l').value : 0.0001;
+  const rd = document.getElementById('d_r').value ? document.getElementById('d_r').value : 0.03;
+  const lnnz = lr*lc*ld;
+  const rnnz = lc*rc*rd;    
+	let resultData;
+  const api = "https://lcukdaf75g.execute-api.us-west-2.amazonaws.com/dos-inference-stage/dos-inference-resource";
+
+	fetch(api, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+            "lr" : lr,
+            "lc" : lc,
+            "rc" : rc,
+            "ld" : ld,
+            "rd" : rd,
+            "lnnz" : lnnz,
+            "rnnz" : rnnz
+        }),
+  }).then((response) => console.log(response));
 };
 
 let chart, resultChart
