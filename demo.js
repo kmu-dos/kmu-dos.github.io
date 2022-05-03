@@ -1,30 +1,30 @@
-window.onload = function() {
-  const lr = 10000;
-  const lc = 60000;
-  const rc = 20000;
-  const ld = 0.0001;
-  const rd = 0.03;
-  const lnnz = lr*lc*ld;
-  const rnnz = lc*rc*rd;
-  let resultData;
-  const api = "https://lcukdaf75g.execute-api.us-west-2.amazonaws.com/dos-inference-stage/dos-inference-resource";
-
-	fetch(api, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-            "lr" : lr,
-            "lc" : lc,
-            "rc" : rc,
-            "ld" : ld,
-            "rd" : rd,
-            "lnnz" : lnnz,
-            "rnnz" : rnnz
-        }),
-  }).then((response) => console.log(""));
-};
+// window.onload = function() {
+//   const lr = 10000;
+//   const lc = 60000;
+//   const rc = 20000;
+//   const ld = 0.0001;
+//   const rd = 0.03;
+//   const lnnz = lr*lc*ld;
+//   const rnnz = lc*rc*rd;
+//   let resultData;
+//   const api = "https://lcukdaf75g.execute-api.us-west-2.amazonaws.com/dos-inference-stage/dos-inference-resource";
+//
+// 	fetch(api, {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   body: JSON.stringify({
+//             "lr" : lr,
+//             "lc" : lc,
+//             "rc" : rc,
+//             "ld" : ld,
+//             "rd" : rd,
+//             "lnnz" : lnnz,
+//             "rnnz" : rnnz
+//         }),
+//   }).then((response) => console.log(""));
+// };
 
 let chart, resultChart
 document.addEventListener("DOMContentLoaded", function(){

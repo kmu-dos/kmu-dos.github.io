@@ -216,7 +216,7 @@ h2 {
     border-radius: 50%;
     border: 10px solid #4c9de7;
     border-color: #4c9de7 transparent #4c9de7 transparent;
-    animation: rotate 8s linear infinite;
+    animation: rotate 32s linear infinite;
 }
 /*about*/
 .about-description {
