@@ -17,20 +17,51 @@ html {
     align-items: end;
     box-shadow: 0 3px 5px #e8e8e8;
 }
+
+@media screen and (max-width: 680px) {
+    .header h1 {
+        font-size: 20px;
+    }
+    .nav-bar {
+        gap: 5px
+    }
+}
+@media screen and (min-width: 680px) {
+    .header h1 {
+        font-size: 30px;
+    }
+    .nav-bar button {
+        font-size: 15px;
+    }
+    .nav-bar {
+        gap: 15px
+    }
+    .help-btn .helpbtn-label {
+        font-size: 12px;
+    }
+}
+@media screen and (min-width: 1075px) {
+    .header h1 {
+        font-size: 50px;
+    }
+    .nav-bar button {
+        font-size: 20px;
+    }
+    .nav-bar {
+        gap: 20px
+    }
+}
 .header h1 {
     color: #777777;
     font-weight: bold;
-    font-size: 50px;
     padding-bottom: 5px;
 }
 .nav-bar {
     display: flex;
     flex-direction: row;
-    gap: 20px;
     justify-content: space-between;
 }
 .nav-bar button {
-    font-size: 20px;
     color: #777;
     cursor: pointer;
     transition: all 0.5s;
@@ -39,7 +70,7 @@ html {
     color: #008fff;
 }
 .contents {
-    padding: 30px 10% 0 10%;
+    padding: 30px 10% 30px 10%;
 }
 h2 {
     font-size: 30px;
@@ -60,15 +91,48 @@ h2 {
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 1px solid #d0d0d0;
+    position: relative;
 }
 /*table*/
-#user-input {
+.help-btn {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+.help-btn button {
+    height: 100%;
+    width: 45%;
+    cursor: pointer;
+}
+.helpbtn-label {
+    color: #303f4e;
+    font-weight: bold;
+    text-decoration: underline;
+    width: 100%;
+    padding: 6.5px 0;
+    font-size: 15px;
+    margin: 0 auto;
+}
+.help-btn .desc-text {
+    top: -100% !important;
+    left: 0 !important;
+    width: max-content;
+    word-break: keep-all;
+    max-width: none;
+}
+#inputDiv {
     border-right: 1px solid #d0d0d0;
+    width: calc(30% - 30px);
+    padding: 0 30px 0 0;
+}
+#user-input {
     color: #424242;
     font-size: 16px;
-    width: calc(30% - 30px);
+    width: 100%;
     border-spacing: 0;
-    padding: 30px 30px 0 0;
 }
 #user-input tr {
     height: 40px;
@@ -138,7 +202,6 @@ h2 {
 /*result*/
 #result-data {
     padding: 30px;
-    border-right: 1px solid #d0d0d0;
     width: calc(40% - 60px);
     color: #424242;
 }
@@ -173,6 +236,7 @@ h2 {
     padding: 30px 0 30px 2%;
     height: max-content;
     text-align: center;
+    border-left: 1px solid #d0d0d0;
 }
 .graph-section p {
     padding-left: 20%;
@@ -194,6 +258,19 @@ h2 {
     width: 100%;
     height: 100vh;
     background: rgba(255,255,255, 0.5);
+}
+.graph-bottomRow {
+    display: none;
+    width: 80%;
+    height: 400px;
+    margin: 20px auto;
+}
+.graph-bottomRow p {
+    padding-left: 10%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #424242;
+    text-align: center;
 }
 .container {
     height:100%;

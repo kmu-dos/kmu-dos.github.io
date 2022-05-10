@@ -33,46 +33,58 @@
         <p><b>Step 3.</b> Check Sparse X Sparse Latency and Sparse X Dense Latency according to matrix multiplication information.</p>
         </div>
         <div id="demo-function">
-            <table id="user-input">
-                <tr>
-                    <th>Matrix info</th>
-                    <th>Input</th>
-                </tr>
-                <tr>
-                    <th class="add-desc">NR<p class="subscription">L</p>
-                        <p class="desc-text">The number of rows for a left matrix</p>
-                    </th>
-                    <td><input type="text" placeholder="10000" id="nr_l"></td>
-                </tr>
-                <tr>
-                    <th class="add-desc">NC<p class="subscription">L</p>
-                        <p class="desc-text">The number of columns for a left matrix</p>
-                    </th>
-                    <td><input type="text" placeholder="60000" id="nc_l"></td>
-                </tr>
-                <tr>
-                    <th class="add-desc">NC<p class="subscription">R</p>
-                        <p class="desc-text">The number of columns for a right matrix</p>
-                    </th>
-                    <td><input type="text" placeholder="20000" id="nc_r"></td>
-                </tr>
-                <tr>
-                    <th class="add-desc">D<p class="subscription">L</p>
-                        <p class="desc-text">The density of the left matrix</p>
-                    </th>
-                    <td><input type="text" placeholder="0.0001" id="d_l"></td>
-                </tr>
-                <tr>
-                    <th class="add-desc">D<p class="subscription">R</p>
-                        <p class="desc-text">The density of the right matrix</p>
-                    </th>
-                    <td><input type="text" placeholder="0.03" id="d_r"></td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th><button onclick="submit()" class="submit-btn">SUBMIT</button></th>
-                </tr>
-            </table>
+            <div id="inputDiv">
+                <div class="help-btn">
+                    <button onclick="exampleSXS()" class="add-desc"><p class="helpbtn-label">Test Data A</p>
+                        <p class="desc-text">[Sparse X Sparse]
+                            Best Case</p>
+                    </button>
+                    <button onclick="exampleSXD()" class="add-desc"><p class="helpbtn-label">Test Data B</p>
+                        <p class="desc-text">[Sparse X Dense]
+                            Best Case</p>
+                    </button>
+                </div>
+                <table id="user-input">
+                    <tr>
+                        <th>Matrix info</th>
+                        <th>Input</th>
+                    </tr>
+                    <tr>
+                        <th class="add-desc">NR<p class="subscription">L</p>
+                            <p class="desc-text">The number of rows for a left matrix</p>
+                        </th>
+                        <td><input type="text" placeholder="10000" id="nr_l"></td>
+                    </tr>
+                    <tr>
+                        <th class="add-desc">NC<p class="subscription">L</p>
+                            <p class="desc-text">The number of columns for a left matrix</p>
+                        </th>
+                        <td><input type="text" placeholder="60000" id="nc_l"></td>
+                    </tr>
+                    <tr>
+                        <th class="add-desc">NC<p class="subscription">R</p>
+                            <p class="desc-text">The number of columns for a right matrix</p>
+                        </th>
+                        <td><input type="text" placeholder="20000" id="nc_r"></td>
+                    </tr>
+                    <tr>
+                        <th class="add-desc">D<p class="subscription">L</p>
+                            <p class="desc-text">The density of the left matrix</p>
+                        </th>
+                        <td><input type="text" placeholder="0.0001" id="d_l"></td>
+                    </tr>
+                    <tr>
+                        <th class="add-desc">D<p class="subscription">R</p>
+                            <p class="desc-text">The density of the right matrix</p>
+                        </th>
+                        <td><input type="text" placeholder="0.03" id="d_r"></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th><button onclick="submit()" class="submit-btn">SUBMIT</button></th>
+                    </tr>
+                </table>
+            </div>
             <div id="result-data">
                 <table>
                     <tr>
@@ -100,11 +112,16 @@
                 </table>
                 <p id="result-comment"></p>
             </div>
-            <div class="graph-section">
+            <div class="graph-section graph-topRow">
                 <p>Latency Prediction Result </p><p>according to SPMM Method</p>
                 <canvas id="data-graph"></canvas>
                 <p>SPMM Method</p>
             </div>
+        </div>
+        <div class="graph-bottomRow">
+            <p>Latency Prediction Result according to SPMM Method</p>
+            <canvas id="data-graph-wide"></canvas>
+            <p>SPMM Method</p>
         </div>
     </div>
     <div id="loading">
