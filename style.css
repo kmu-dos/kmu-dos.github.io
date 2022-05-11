@@ -50,6 +50,13 @@ html {
     .nav-bar {
         gap: 20px
     }
+    .help-btn .helpbtn-label {
+        font-size: 15px;
+    }
+    .desc-text {
+        max-width: 100%;
+        left: -100%;
+    }
 }
 .header h1 {
     color: #777777;
@@ -104,7 +111,7 @@ h2 {
 }
 .help-btn button {
     height: 100%;
-    width: 45%;
+    width: 50%;
     cursor: pointer;
 }
 .helpbtn-label {
@@ -113,15 +120,16 @@ h2 {
     text-decoration: underline;
     width: 100%;
     padding: 6.5px 0;
-    font-size: 15px;
+    font-size: 10px;
     margin: 0 auto;
 }
 .help-btn .desc-text {
-    top: -100% !important;
+    top: -400% !important;
     left: 0 !important;
     width: max-content;
     word-break: keep-all;
     max-width: none;
+    background-color: rgba(128,128,128,1);
 }
 #inputDiv {
     border-right: 1px solid #d0d0d0;
@@ -168,9 +176,9 @@ h2 {
     position: absolute;
     background-color: rgba(28,28,28,0.56);
     color: #fff;
-    left: -100%;
+    left: -50%;
+    max-width: 50%;
     top: 0;
-    max-width: 100%;
     font-size: 14px;
     word-break: keep-all;
     text-align: left;
