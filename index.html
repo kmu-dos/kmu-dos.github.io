@@ -32,26 +32,29 @@
         <br>
         <p><b>Step 3.</b> Check Sparse X Sparse Latency and Sparse X Dense Latency according to matrix multiplication information.</p>
         </div>
-        <div id="demo-function">
-            <div id="inputDiv">
-                <div class="help-btn">
-                    <button onclick="exampleSXS()" class="add-desc"><p class="helpbtn-label">Test Data A</p>
-                        <p class="desc-text">[Sparse X Sparse] Best Case<br>
+        <div class="help-div">
+            <p class="help-notice">Click either “Test Data A” or “Test Data B” to fill in the input matrix dimensions to query.<br/>Two sample test data represent cases where different SPMM implementations show performance variation.</p>
+            <div class="help-btn">
+                <button onclick="exampleSXS()" class="add-desc"><p class="helpbtn-label">Test Data A</p>
+                    <p class="desc-text">[Sparse X Sparse] Best Case<br>
                         NR_L : 10000<br>
                         NC_L : 60000<br>
                         NC_R : 20000<br>
                         D_L : 0.0001<br>
                         D_R : 0.03<br></p>
-                    </button>
-                    <button onclick="exampleSXD()" class="add-desc"><p class="helpbtn-label">Test Data B</p>
-                        <p class="desc-text">[Sparse X Dense] Best Case<br>
+                </button>
+                <button onclick="exampleSXD()" class="add-desc"><p class="helpbtn-label">Test Data B</p>
+                    <p class="desc-text">[Sparse X Dense] Best Case<br>
                         NR_L : 140000<br>
                         NC_L : 30000<br>
                         NC_R : 2000<br>
                         D_L : 0.0002<br>
                         D_R : 0.3</p>
-                    </button>
-                </div>
+                </button>
+            </div>
+        </div>
+        <div id="demo-function">
+            <div id="inputDiv">
                 <table id="user-input">
                     <tr>
                         <th>Matrix info</th>

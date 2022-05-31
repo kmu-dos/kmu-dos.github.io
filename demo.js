@@ -1,30 +1,3 @@
-// window.onload = function() {
-//   const lr = 10000;
-//   const lc = 60000;
-//   const rc = 20000;
-//   const ld = 0.0001;
-//   const rd = 0.03;
-//   const lnnz = lr*lc*ld;
-//   const rnnz = lc*rc*rd;
-//   let resultData;
-//   const api = "https://lcukdaf75g.execute-api.us-west-2.amazonaws.com/dos-inference-stage/dos-inference-resource";
-//
-// 	fetch(api, {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-//   body: JSON.stringify({
-//             "lr" : lr,
-//             "lc" : lc,
-//             "rc" : rc,
-//             "ld" : ld,
-//             "rd" : rd,
-//             "lnnz" : lnnz,
-//             "rnnz" : rnnz
-//         }),
-//   }).then((response) => console.log(""));
-// };
 let chart1 = true;
 window.onload = function (){
     let innerWidth = document.documentElement.clientWidth;
@@ -42,12 +15,16 @@ function changeChart(){
         document.getElementsByClassName('graph-topRow')[0].style.display = 'none';
         document.getElementsByClassName('graph-bottomRow')[0].style.display = 'block';
         document.getElementById('inputDiv').style.width = '50%';
+        let w = document.getElementById('inputDiv').clientWidth;
+        document.getElementsByClassName('help-btn')[0].style.width = w+'px';
         document.getElementById('result-data').style.width = '50%';
 
     }else {
         document.getElementsByClassName('graph-topRow')[0].style.display = 'block';
         document.getElementsByClassName('graph-bottomRow')[0].style.display = 'none';
         document.getElementById('inputDiv').style.width = 'calc(30% - 30px)';
+        let w = document.getElementById('inputDiv').offsetWidth;
+        document.getElementsByClassName('help-btn')[0].style.width = w+'px';
         document.getElementById('result-data').style.width = 'calc(40% - 60px)';
     }
 
@@ -68,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function(){
     })
 })
 let defaultData = {
-    labels: ['Sparse X Sparse', 'Sparse X Dense'],
+    labels: ['Sparse X Sparse', 'Sparse X Dense\n(Spark default)'],
     datasets: [{
         label: 'Latency (ms)',
         backgroundColor: "#008fff",
@@ -180,7 +157,7 @@ async function submit (){
             resultChart = new Chart(chart, {
                 type: 'bar',
                 data: {
-                    labels: ['Sparse X Sparse', 'Sparse X Dense'],
+                    labels: ['Sparse X Sparse', 'Sparse X Dense (Spark default)'],
                     datasets: [{
                         label: 'Latency (ms)',
                         backgroundColor: "#4c9de7",
@@ -242,7 +219,7 @@ async function submit (){
             bottomResultChart = new Chart(bottomChart, {
                 type: 'bar',
                 data: {
-                    labels: ['Sparse X Sparse', 'Sparse X Dense'],
+                    labels: ['Sparse X Sparse', 'Sparse X Dense (Spark default)'],
                     datasets: [{
                         label: 'Latency (ms)',
                         backgroundColor: "#4c9de7",
